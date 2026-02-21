@@ -1,81 +1,483 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>BharatAI Research | Product-led Cloud & AI Company</title>
-  <meta name="description" content="Product-driven organization building AI platforms, cloud automation and enterprise SaaS products.">
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BharatAI & Research Technologies Pvt. Ltd.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@200;400;600;800;900&family=Rajdhani:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a0f2e;
+    --deep: #060c24;
+    --blue1: #1a73e8;
+    --blue2: #4fc3f7;
+    --cyan: #00e5ff;
+    --accent: #00b4d8;
+    --white: #f0f6ff;
+    --muted: rgba(160,200,255,0.55);
+    --card: rgba(255,255,255,0.04);
+    --border: rgba(79,195,247,0.18);
+  }
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--deep);
+    color: var(--white);
+    font-family: 'Rajdhani', sans-serif;
+    overflow-x: hidden;
+  }
+  #stars { position:fixed; inset:0; z-index:0; pointer-events:none; }
+
+  /* NAV */
+  nav {
+    position: fixed; top:0; left:0; right:0; z-index:100;
+    display: flex; align-items:center; justify-content:space-between;
+    padding: 1.1rem 4rem;
+    background: rgba(6,12,36,0.75);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    display:flex; align-items:center; gap:.8rem;
+    font-family:'Exo 2', sans-serif; font-weight:800; font-size:1.25rem; letter-spacing:.03em;
+  }
+  .logo-tri {
+    width:36px; height:36px;
+    background: linear-gradient(135deg, var(--cyan), var(--blue1));
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    filter: drop-shadow(0 0 8px var(--cyan));
+  }
+  .nav-logo span { color: var(--cyan); }
+  nav ul { list-style:none; display:flex; gap:2.5rem; }
+  nav ul a { text-decoration:none; color:var(--muted); font-size:1rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase; transition:color .2s; }
+  nav ul a:hover { color:var(--cyan); }
+  .nav-cta {
+    background: linear-gradient(90deg, var(--blue1), var(--cyan));
+    color:#fff; border:none; border-radius:4px;
+    padding:.55rem 1.5rem; font-family:'Exo 2',sans-serif;
+    font-weight:700; font-size:.9rem; letter-spacing:.06em;
+    cursor:pointer; text-transform:uppercase;
+    box-shadow: 0 0 20px rgba(0,229,255,0.25);
+    transition: box-shadow .2s, transform .15s;
+  }
+  .nav-cta:hover { box-shadow:0 0 30px rgba(0,229,255,0.5); transform:translateY(-1px); }
+
+  /* HERO */
+  #hero {
+    min-height:100vh; position:relative; z-index:1;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:8rem 2rem 4rem; overflow:hidden;
+  }
+  .hero-glow {
+    position:absolute; width:900px; height:900px; border-radius:50%;
+    background: radial-gradient(circle, rgba(0,229,255,0.07) 0%, transparent 70%);
+    top:50%; left:50%; transform:translate(-50%,-50%);
+    animation: pulse 5s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:.6;transform:translate(-50%,-50%) scale(1);} 50%{opacity:1;transform:translate(-50%,-50%) scale(1.08);} }
+
+  .hero-badge {
+    display:inline-block; border:1px solid var(--cyan); color:var(--cyan);
+    background:rgba(0,229,255,0.07); padding:.4rem 1.2rem; border-radius:100px;
+    font-family:'Space Mono',monospace; font-size:.78rem; letter-spacing:.12em; margin-bottom:2rem;
+    animation: fadeDown .8s ease both;
+  }
+  .hero-title {
+    font-family:'Exo 2',sans-serif; font-weight:900;
+    font-size:clamp(2.8rem, 7vw, 6.5rem); line-height:1.0; letter-spacing:-.02em;
+    animation: fadeDown .9s .1s ease both;
+  }
+  .hero-title .ai { background: linear-gradient(90deg, var(--blue2), var(--cyan)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .hero-sub { margin-top:1.5rem; font-size:clamp(1rem,2vw,1.35rem); font-weight:400; color:var(--muted); max-width:640px; line-height:1.6; animation:fadeDown 1s .2s ease both; }
+  .hero-tags { margin-top:1.6rem; display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; animation:fadeDown 1s .3s ease both; }
+  .tag { background:rgba(79,195,247,0.1); border:1px solid var(--border); color:var(--blue2); border-radius:4px; padding:.35rem 1rem; font-size:.88rem; font-weight:600; letter-spacing:.04em; }
+  .hero-btns { margin-top:2.5rem; display:flex; gap:1.2rem; flex-wrap:wrap; justify-content:center; animation:fadeDown 1s .4s ease both; }
+  .btn-primary { background:linear-gradient(90deg, var(--blue1), var(--cyan)); color:#fff; border:none; border-radius:6px; padding:.85rem 2.4rem; font-family:'Exo 2',sans-serif; font-weight:700; font-size:1rem; letter-spacing:.06em; cursor:pointer; text-transform:uppercase; box-shadow:0 0 30px rgba(0,229,255,0.3); transition:all .2s; }
+  .btn-primary:hover { transform:translateY(-2px); box-shadow:0 0 50px rgba(0,229,255,0.5); }
+  .btn-ghost { background:transparent; color:var(--cyan); border:1px solid var(--cyan); border-radius:6px; padding:.85rem 2.4rem; font-family:'Exo 2',sans-serif; font-weight:700; font-size:1rem; letter-spacing:.06em; cursor:pointer; text-transform:uppercase; transition:all .2s; }
+  .btn-ghost:hover { background:rgba(0,229,255,0.08); }
+  .hero-metrics { margin-top:4rem; display:flex; gap:3rem; flex-wrap:wrap; justify-content:center; animation:fadeDown 1s .5s ease both; }
+  .metric { text-align:center; }
+  .metric-num { font-family:'Exo 2',sans-serif; font-weight:900; font-size:2.2rem; color:var(--cyan); line-height:1; }
+  .metric-label { font-size:.85rem; color:var(--muted); margin-top:.3rem; letter-spacing:.06em; }
+
+  /* SECTION */
+  section { position:relative; z-index:1; padding:6rem 2rem; }
+  .container { max-width:1200px; margin:0 auto; }
+  .section-label { font-family:'Space Mono',monospace; font-size:.78rem; color:var(--cyan); letter-spacing:.15em; text-transform:uppercase; margin-bottom:.8rem; }
+  .section-title { font-family:'Exo 2',sans-serif; font-weight:800; font-size:clamp(1.8rem,4vw,3rem); line-height:1.1; }
+  .section-title span { color:var(--cyan); }
+  .section-desc { color:var(--muted); font-size:1.1rem; line-height:1.7; margin-top:1rem; max-width:580px; }
+
+  /* SERVICES */
+  .services-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1.5rem; margin-top:3.5rem; }
+  .service-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:2rem; position:relative; overflow:hidden; transition:transform .25s, border-color .25s, box-shadow .25s; }
+  .service-card::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg, rgba(0,229,255,0.06) 0%, transparent 60%); opacity:0; transition:opacity .3s; }
+  .service-card:hover { transform:translateY(-5px); border-color:rgba(0,229,255,0.45); box-shadow:0 20px 50px rgba(0,0,0,.4); }
+  .service-card:hover::before { opacity:1; }
+  .service-icon { width:52px; height:52px; border-radius:10px; background:linear-gradient(135deg, var(--blue1), var(--cyan)); display:flex; align-items:center; justify-content:center; font-size:1.6rem; margin-bottom:1.3rem; box-shadow:0 0 20px rgba(0,229,255,0.25); }
+  .service-card h3 { font-family:'Exo 2',sans-serif; font-weight:700; font-size:1.25rem; margin-bottom:.6rem; }
+  .service-card p { color:var(--muted); font-size:.97rem; line-height:1.65; }
+
+  /* WHY */
+  #why { background:linear-gradient(180deg, transparent, rgba(0,229,255,0.03) 50%, transparent); }
+  .why-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; margin-top:3rem; }
+  .why-list { display:flex; flex-direction:column; gap:1.5rem; margin-top:1rem; }
+  .why-item { display:flex; gap:1rem; align-items:flex-start; }
+  .why-dot { width:32px; height:32px; border-radius:50%; flex-shrink:0; background:linear-gradient(135deg, var(--blue1), var(--cyan)); display:flex; align-items:center; justify-content:center; font-size:.9rem; font-weight:700; font-family:'Exo 2',sans-serif; box-shadow:0 0 15px rgba(0,229,255,0.3); }
+  .why-item p { color:var(--muted); font-size:1rem; line-height:1.6; }
+  .why-item p strong { color:var(--white); }
+  .visual-box { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:2.5rem; display:flex; flex-direction:column; gap:1.2rem; position:relative; overflow:hidden; }
+  .visual-box::after { content:''; position:absolute; width:200px; height:200px; border-radius:50%; background:radial-gradient(circle, rgba(0,229,255,0.15), transparent); top:-50px; right:-50px; }
+  .vb-row { display:flex; align-items:center; gap:1rem; padding:1rem; background:rgba(255,255,255,0.03); border-radius:8px; border-left:3px solid var(--cyan); }
+  .vb-icon { font-size:1.5rem; }
+  .vb-text strong { font-family:'Exo 2',sans-serif; font-weight:700; display:block; }
+  .vb-text span { font-size:.88rem; color:var(--muted); }
+
+  /* TECH */
+  .tech-strip { margin-top:3rem; display:flex; flex-wrap:wrap; gap:1rem; justify-content:center; }
+  .tech-pill { background:rgba(26,115,232,0.12); border:1px solid rgba(26,115,232,0.3); color:var(--blue2); border-radius:100px; padding:.45rem 1.2rem; font-family:'Space Mono',monospace; font-size:.8rem; letter-spacing:.05em; transition:all .2s; cursor:default; }
+  .tech-pill:hover { background:rgba(0,229,255,0.15); border-color:var(--cyan); color:var(--cyan); }
+
+  /* CONTACT */
+  #contact { background:linear-gradient(135deg, rgba(26,115,232,0.05), rgba(0,229,255,0.05)); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; margin-top:3rem; }
+  .contact-info { display:flex; flex-direction:column; gap:1.5rem; }
+  .info-row { display:flex; gap:1rem; align-items:flex-start; }
+  .info-icon { width:42px; height:42px; border-radius:8px; flex-shrink:0; background:rgba(0,229,255,0.1); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:1.2rem; }
+  .info-content strong { font-family:'Exo 2',sans-serif; display:block; font-size:.9rem; letter-spacing:.06em; text-transform:uppercase; color:var(--cyan); margin-bottom:.25rem; }
+  .info-content span, .info-content a { color:var(--muted); font-size:.97rem; line-height:1.5; text-decoration:none; }
+  .info-content a:hover { color:var(--cyan); }
+  .contact-form { display:flex; flex-direction:column; gap:1.2rem; }
+  .form-group { display:flex; flex-direction:column; gap:.5rem; }
+  .form-group label { font-family:'Space Mono',monospace; font-size:.75rem; color:var(--cyan); letter-spacing:.1em; text-transform:uppercase; }
+  .form-group input, .form-group textarea { background:rgba(255,255,255,0.04); border:1px solid var(--border); border-radius:6px; padding:.8rem 1rem; color:var(--white); font-family:'Rajdhani',sans-serif; font-size:1rem; transition:border-color .2s, background .2s; outline:none; resize:none; }
+  .form-group input:focus, .form-group textarea:focus { border-color:var(--cyan); background:rgba(0,229,255,0.04); }
+  .form-group input::placeholder, .form-group textarea::placeholder { color:rgba(160,200,255,0.3); }
+
+  /* FOOTER */
+  footer { position:relative; z-index:1; padding:2.5rem 4rem; text-align:center; border-top:1px solid var(--border); color:var(--muted); font-size:.92rem; }
+  .footer-logo { font-family:'Exo 2',sans-serif; font-weight:800; font-size:1.1rem; margin-bottom:.5rem; }
+  .footer-logo span { color:var(--cyan); }
+  .footer-tagline { font-family:'Space Mono',monospace; font-size:.72rem; color:var(--cyan); letter-spacing:.15em; margin-bottom:1rem; text-transform:uppercase; }
+
+  .divider { height:1px; background:linear-gradient(90deg, transparent, var(--border) 30%, var(--border) 70%, transparent); }
+  @keyframes fadeDown { from{opacity:0; transform:translateY(-20px);} to{opacity:1; transform:translateY(0);} }
+
+  @media(max-width:900px) {
+    nav { padding:1rem 1.5rem; }
+    nav ul { display:none; }
+    .why-grid, .contact-grid { grid-template-columns:1fr; gap:2.5rem; }
+  }
+</style>
 </head>
 <body>
 
-<header>
-  <div class="container header-flex">
-    <img src="assets/logo.jpeg" alt="BharatAI Logo" class="logo">
-    <nav>
-      <a href="#products">Products</a>
-      <a href="#platform">Platform</a>
-      <a href="#about">About</a>
-    </nav>
-  </div>
-</header>
+<canvas id="stars"></canvas>
 
-<section class="hero">
-  <div class="container">
-    <h1>Product‑First Cloud & AI Platforms</h1>
-    <p>
-      BharatAI Research builds enterprise‑ready AI and cloud products that solve real operational problems at scale.
-    </p>
+<nav>
+  <div class="nav-logo">
+    <div class="logo-tri"></div>
+    <span>Bharat</span>AI
+  </div>
+  <ul>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">About</a></li>
+    <li><a href="#tech">Tech</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get In Touch</button>
+</nav>
+
+<section id="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-badge">🇮🇳 &nbsp; Made in India · Built for the World</div>
+  <h1 class="hero-title">
+    <span>BHARAT</span><span class="ai">AI</span><br>
+    <span style="font-size:.55em; font-weight:300; letter-spacing:.1em; opacity:.85;">& RESEARCH TECHNOLOGIES PVT. LTD.</span>
+  </h1>
+  <p class="hero-sub">Pioneering AI-powered software products, cutting-edge research, and intelligent platforms that redefine what technology can achieve.</p>
+  <div class="hero-tags">
+    <span class="tag">Software Product Development</span>
+    <span class="tag">AI Development</span>
+    <span class="tag">Research & Innovation</span>
+    <span class="tag">Intelligent Platforms</span>
+  </div>
+  <div class="hero-btns">
+    <button class="btn-primary" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Explore Services</button>
+    <button class="btn-ghost" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Contact Us</button>
+  </div>
+  <div class="hero-metrics">
+    <div class="metric"><div class="metric-num">AI</div><div class="metric-label">Core Focus</div></div>
+    <div class="metric"><div class="metric-num">R&D</div><div class="metric-label">Research Driven</div></div>
+    <div class="metric"><div class="metric-num">∞</div><div class="metric-label">Innovation Mindset</div></div>
   </div>
 </section>
 
-<section id="products" class="section">
+<div class="divider"></div>
+
+<section id="services">
   <div class="container">
-    <h2>Our Products</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>AI Ops Platform</h3>
-        <p>Intelligent incident detection, root cause analysis and automated remediation for enterprise systems.</p>
+    <div class="section-label">// What We Build</div>
+    <h2 class="section-title">Our <span>Core</span> Services</h2>
+    <p class="section-desc">End-to-end technology solutions spanning AI research, intelligent software, and scalable platform engineering.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🤖</div>
+        <h3>AI Development</h3>
+        <p>Custom large language models, computer vision systems, NLP pipelines, and generative AI solutions tailored to your domain and scale.</p>
       </div>
-      <div class="card">
-        <h3>Cloud Automation Suite</h3>
-        <p>Automated provisioning, compliance enforcement and cost optimization across multi‑cloud environments.</p>
+      <div class="service-card">
+        <div class="service-icon">🧠</div>
+        <h3>AI Research</h3>
+        <p>Deep academic and applied research into emerging AI paradigms — from reinforcement learning to multi-modal architectures and beyond.</p>
       </div>
-      <div class="card">
-        <h3>Enterprise GenAI Hub</h3>
-        <p>Secure internal AI assistants for knowledge search, support automation and decision intelligence.</p>
+      <div class="service-card">
+        <div class="service-icon">💻</div>
+        <h3>Software Product Development</h3>
+        <p>Full-cycle product engineering — ideation, architecture, development, QA, and deployment of world-class SaaS and enterprise software.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🚀</div>
+        <h3>Intelligent Platforms</h3>
+        <p>Design and delivery of AI-native platforms that power automation, decision intelligence, and data-driven operations at enterprise scale.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📊</div>
+        <h3>Data Engineering</h3>
+        <p>Robust data pipelines, warehousing, and analytics infrastructure that powers your AI models and business intelligence systems.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔬</div>
+        <h3>R&D Consulting</h3>
+        <p>Strategic advisory for organizations looking to embed AI into their core — from feasibility studies to full-scale deployment roadmaps.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section id="platform" class="section dark">
+<div class="divider"></div>
+
+<section id="why">
   <div class="container">
-    <h2>Our Platform DNA</h2>
-    <ul class="points">
-      <li>Product‑led engineering</li>
-      <li>Security‑by‑design</li>
-      <li>Cloud‑native & scalable</li>
-      <li>Enterprise SRE mindset</li>
-    </ul>
+    <div class="why-grid">
+      <div>
+        <div class="section-label">// Why BharatAI</div>
+        <h2 class="section-title">Discipline.<br><span>Focus.</span> Execute.</h2>
+        <p class="section-desc">Our three-word ethos drives everything we do. We don't just build technology — we engineer outcomes.</p>
+        <div class="why-list">
+          <div class="why-item">
+            <div class="why-dot">01</div>
+            <p><strong>India-rooted, globally minded.</strong> We understand the nuances of Indian markets while engineering for global standards and scale.</p>
+          </div>
+          <div class="why-item">
+            <div class="why-dot">02</div>
+            <p><strong>Research-first culture.</strong> Every product we ship is backed by rigorous research, ensuring it's not just functional but genuinely innovative.</p>
+          </div>
+          <div class="why-item">
+            <div class="why-dot">03</div>
+            <p><strong>Full ownership, zero excuses.</strong> We take end-to-end responsibility — from the first commit to production monitoring.</p>
+          </div>
+          <div class="why-item">
+            <div class="why-dot">04</div>
+            <p><strong>AI-native by design.</strong> AI isn't an add-on here — it's baked into the architecture, culture, and thinking of everything we create.</p>
+          </div>
+        </div>
+      </div>
+      <div class="visual-box">
+        <div class="vb-row">
+          <div class="vb-icon">🏢</div>
+          <div class="vb-text"><strong>Registered Company</strong><span>CIN: U62099PN2026PTC250775</span></div>
+        </div>
+        <div class="vb-row">
+          <div class="vb-icon">📍</div>
+          <div class="vb-text"><strong>Headquarters</strong><span>Jule Solapur, Maharashtra, India – 413004</span></div>
+        </div>
+        <div class="vb-row">
+          <div class="vb-icon">🌐</div>
+          <div class="vb-text"><strong>Global Reach</strong><span>Products built to operate worldwide</span></div>
+        </div>
+        <div class="vb-row">
+          <div class="vb-icon">⚡</div>
+          <div class="vb-text"><strong>Startup Agility</strong><span>Fast, iterative, outcome-focused delivery</span></div>
+        </div>
+        <div class="vb-row">
+          <div class="vb-icon">🔐</div>
+          <div class="vb-text"><strong>Trusted & Compliant</strong><span>Built with security and ethics at the core</span></div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<section id="about" class="section">
+<div class="divider"></div>
+
+<section id="tech">
+  <div class="container" style="text-align:center;">
+    <div class="section-label">// Technology Stack</div>
+    <h2 class="section-title">Built on the <span>Best</span></h2>
+    <p class="section-desc" style="margin:1rem auto 0;">We leverage the world's most powerful AI and engineering technologies to build products that lead, not follow.</p>
+    <div class="tech-strip">
+      <span class="tech-pill">Python</span>
+      <span class="tech-pill">TensorFlow</span>
+      <span class="tech-pill">PyTorch</span>
+      <span class="tech-pill">LangChain</span>
+      <span class="tech-pill">OpenAI API</span>
+      <span class="tech-pill">Hugging Face</span>
+      <span class="tech-pill">React.js</span>
+      <span class="tech-pill">Node.js</span>
+      <span class="tech-pill">FastAPI</span>
+      <span class="tech-pill">PostgreSQL</span>
+      <span class="tech-pill">MongoDB</span>
+      <span class="tech-pill">Redis</span>
+      <span class="tech-pill">Docker</span>
+      <span class="tech-pill">Kubernetes</span>
+      <span class="tech-pill">AWS</span>
+      <span class="tech-pill">GCP</span>
+      <span class="tech-pill">Azure</span>
+      <span class="tech-pill">Apache Kafka</span>
+      <span class="tech-pill">Apache Spark</span>
+      <span class="tech-pill">RAG Systems</span>
+      <span class="tech-pill">Vector DBs</span>
+      <span class="tech-pill">Fine-tuning</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="contact">
   <div class="container">
-    <h2>About BharatAI Research</h2>
-    <p>
-      BharatAI Research Technologies Pvt. Ltd. is a product‑based technology organization focused on building
-      scalable, secure and intelligent platforms for enterprises.
-      <br><br>
-      <strong>Discipline. Focus. Execute.</strong>
-    </p>
+    <div class="section-label">// Get In Touch</div>
+    <h2 class="section-title">Let's Build <span>Together</span></h2>
+    <p class="section-desc">Whether you're a startup, enterprise, or researcher — we'd love to hear from you.</p>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="info-row">
+          <div class="info-icon">📍</div>
+          <div class="info-content">
+            <strong>Address</strong>
+            <span>Melody Business Centre, 3rd Floor, Plot No 12 to 15,<br>Sur No 124 A-5, Near Old Indian Model School,<br>Jule Solapur, Solapur – 413004, Maharashtra, India</span>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">🌐</div>
+          <div class="info-content">
+            <strong>Website</strong>
+            <a href="https://www.e-bharatai.com" target="_blank">www.e-bharatai.com</a>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">✉️</div>
+          <div class="info-content">
+            <strong>Email</strong>
+            <a href="mailto:director@e-bharatai.com">director@e-bharatai.com</a>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">📞</div>
+          <div class="info-content">
+            <strong>Phone</strong>
+            <a href="tel:+919607778345">+91 96077 78345</a>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">🏢</div>
+          <div class="info-content">
+            <strong>CIN</strong>
+            <span>U62099PN2026PTC250775</span>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" placeholder="Full name">
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="you@company.com">
+        </div>
+        <div class="form-group">
+          <label>Subject</label>
+          <input type="text" placeholder="Project inquiry / Partnership / Other">
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea rows="5" placeholder="Tell us about your project or idea..."></textarea>
+        </div>
+        <button class="btn-primary" style="width:100%; padding:1rem;">Send Message →</button>
+      </div>
+    </div>
   </div>
 </section>
 
 <footer>
-  <p>© 2026 BharatAI Research Technologies Pvt. Ltd.</p>
+  <div class="footer-logo"><span>Bharat</span>AI & Research Technologies Pvt. Ltd.®</div>
+  <div class="footer-tagline">Discipline · Focus · Execute</div>
+  <div style="color:var(--muted); font-size:.9rem; margin-bottom:.5rem;">
+    Melody Business Centre, 3rd Floor, Jule Solapur – 413004 &nbsp;|&nbsp; director@e-bharatai.com &nbsp;|&nbsp; +91 96077 78345
+  </div>
+  <div style="font-family:'Space Mono',monospace; font-size:.82rem; opacity:.6;">CIN: U62099PN2026PTC250775</div>
+  <div style="margin-top:1.2rem; font-size:.82rem; opacity:.4;">© 2026 BharatAI & Research Technologies Private Limited. All rights reserved.</div>
 </footer>
 
+<script>
+// STAR FIELD
+const canvas = document.getElementById('stars');
+const ctx = canvas.getContext('2d');
+let stars = [];
+
+function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+
+function initStars() {
+  stars = [];
+  for (let i = 0; i < 200; i++) {
+    stars.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 1.5 + 0.2,
+      o: Math.random() * 0.7 + 0.1,
+      speed: Math.random() * 0.1 + 0.02,
+      drift: (Math.random() - 0.5) * 0.03
+    });
+  }
+}
+
+function drawStars() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  stars.forEach(s => {
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(160,220,255,${s.o})`;
+    ctx.fill();
+    s.y -= s.speed;
+    s.x += s.drift;
+    if (s.y < -2) { s.y = canvas.height + 2; s.x = Math.random() * canvas.width; }
+  });
+  requestAnimationFrame(drawStars);
+}
+
+window.addEventListener('resize', () => { resize(); initStars(); });
+resize(); initStars(); drawStars();
+
+// SCROLL REVEAL
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.service-card, .why-item, .info-row, .vb-row, .tech-pill').forEach((el, i) => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(24px)';
+  el.style.transition = `opacity .6s ${i * 0.04}s ease, transform .6s ${i * 0.04}s ease`;
+  observer.observe(el);
+});
+</script>
 </body>
 </html>
